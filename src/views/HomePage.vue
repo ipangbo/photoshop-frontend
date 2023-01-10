@@ -1,5 +1,6 @@
 <template>
   <div class="content">
+<!--    <PostDetails></PostDetails>-->
     <div class="post-list">
       <div class="post-item" v-for="n in 10" :key="n">
         <img
@@ -39,9 +40,9 @@
 </template>
 
 <script setup lang="ts">
-import TheIcon from "@/components/TheIcon.vue";
 import TheAvatar from "@/components/TheAvatar.vue";
 import PostActions from "@/components/PostActions.vue";
+import PostDetails from "@/components/PostDetails.vue";
 </script>
 
 <style scoped>
@@ -104,7 +105,7 @@ import PostActions from "@/components/PostActions.vue";
 }
 
 /*PostDetails*/
-.postDetails {
+.post-details {
   display: grid;
   grid-template-columns: 1fr minmax(auto, 300px);
   grid-template-rows: minmax(0, 1fr);
@@ -154,12 +155,12 @@ import PostActions from "@/components/PostActions.vue";
   column-gap: 10px;
   row-gap: 14px;
 }
-.commentDate {
+.comment-date {
   grid-area: date;
   justify-self: end;
   color: #a7a7a7;
 }
-.commentContent {
+.comment-content {
   grid-area: comment;
 }
 
@@ -182,17 +183,17 @@ import PostActions from "@/components/PostActions.vue";
   justify-self: end;
   font-size: 14px;
 }
-.commentInput {
+.comment-input {
   background: #f7f7f7;
   border-radius: 16px;
   border: none;
   grid-column: 1 / 4;
 }
-.commentInput::placeholder {
+.comment-input::placeholder {
   color: #b9b9b9;
   border: none;
 }
-.commentPubBtn {
+.comment-pub-button {
   color: #1da0ff;
   border: none;
   background: none;
@@ -202,5 +203,4 @@ import PostActions from "@/components/PostActions.vue";
 }
 
 /*Post Actions*/
-
 </style>

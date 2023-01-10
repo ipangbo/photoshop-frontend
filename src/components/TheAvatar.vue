@@ -6,12 +6,13 @@
 import defaultAvatar from "../assets/avatarDefault.png";
 
 interface Props {
-  src: string;
+  src?: string;
   width?: number;
   height?: number;
 }
 
 withDefaults(defineProps<Props>(), {
+  src: defaultAvatar,
   width: 34,
   height: 34,
 });
