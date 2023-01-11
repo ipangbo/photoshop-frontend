@@ -49,8 +49,7 @@ import TheAvatar from "@/components/TheAvatar.vue";
   grid-template-columns: 1fr 1fr 1fr;
   align-items: center;
 }
-.navbar svg,
-.navbar img {
+.navbar svg {
   width: 38px;
   height: 38px;
 }
