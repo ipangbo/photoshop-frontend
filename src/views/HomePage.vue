@@ -1,7 +1,7 @@
 <template>
   <div>
     <!--    <PostDetails></PostDetails>-->
-    <PostUpload></PostUpload>
+<!--    <PostUpload></PostUpload>-->
     <PostList>
       <PostItem v-for="n in 12" :key="n"></PostItem>
     </PostList>

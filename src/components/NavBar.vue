@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar">
-    <router-link to="/">
-      <img src="../assets/logo.svg" alt="logo" />
+    <router-link to="/" class="logo-link">
+      <img src="../assets/logo.svg" alt="logo" class="logo-image"/>
     </router-link>
     <div class="search-input">
       <input type="text" />
@@ -48,6 +48,14 @@ import TheAvatar from "@/components/TheAvatar.vue";
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   align-items: center;
+}
+.navbar .logo-link {
+  display: block;
+  height: 80px;
+  padding: 5px;
+}
+.navbar .logo-image {
+  height: 100%;
 }
 .navbar svg {
   width: 38px;
