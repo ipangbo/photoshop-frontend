@@ -21,12 +21,12 @@ const router = createRouter({
     {
       path: "/profile/edit",
       name: "profileEdit",
-      component: () => import("@/views/HomePage.vue"),
+      component: () => import("@/views/ProfileEditing.vue"),
     },
     {
       path: "/login",
       name: "login",
-      component: () => import("../views/HomePage.vue"),
+      component: () => import("../views/LoginPage.vue"),
     },
   ],
 });
