@@ -6,10 +6,12 @@
         <input type="file" accept="image/*" class="file-chooser" />
       </label>
       <div class="post-content">
-        <textarea placeholder="写下你的想法..." class="post-content-input">
-        </textarea>
+        <textarea
+          placeholder="写下你的想法..."
+          class="post-content-input"
+        ></textarea>
       </div>
-      <button class="pub-button button">发布</button>
+      <TheButton class="pub-button">发布</TheButton>
     </div>
   </TheModal>
 </template>
@@ -17,6 +19,7 @@
 <script setup lang="ts">
 import TheModal from "@/components/TheModal.vue";
 import TheIcon from "@/components/TheIcon.vue";
+import TheButton from "@/components/TheButton.vue";
 </script>
 
 <style scoped>
@@ -62,14 +65,5 @@ import TheIcon from "@/components/TheIcon.vue";
   position: relative;
   right: 34px;
   bottom: 28px;
-}
-
-.button {
-  border-radius: 8px;
-  padding: 10px 32px;
-  border: none;
-  color: white;
-  font-size: 16px;
-  background: #1da0ff;
 }
 </style>
