@@ -1,7 +1,7 @@
 <template>
-  <div class="content">
+  <div>
     <!--    <PostDetails></PostDetails>-->
-    <PostUpload></PostUpload>
+    <!--    <PostUpload></PostUpload>-->
     <div class="post-list">
       <div class="post-item" v-for="n in 10" :key="n">
         <img
@@ -43,15 +43,10 @@
 <script setup lang="ts">
 import TheAvatar from "@/components/TheAvatar.vue";
 import PostActions from "@/components/PostActions.vue";
-import PostUpload from "@/components/PostUpload.vue";
+import TheLayout from "@/components/TheLayout.vue";
 </script>
 
 <style scoped>
-.content {
-  width: 80vw;
-  max-width: 1124px;
-  margin: 88px auto 0;
-}
 /*PostList*/
 .post-list {
   display: grid;
@@ -95,29 +90,11 @@ import PostUpload from "@/components/PostUpload.vue";
   font-size: 14px;
 }
 
-.post-actions {
-  grid-area: actions;
-  justify-self: end;
-}
-
 .post-desc {
   margin-top: 28px;
   white-space: pre-line;
 }
 
-/*PostDetails*/
-.post-details {
-  display: grid;
-  grid-template-columns: 1fr minmax(auto, 300px);
-  grid-template-rows: minmax(0, 1fr);
-  width: 80vw;
-  height: 80vh;
-}
-.post-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
 .post-meta {
   padding: 36px 24px 24px;
   display: grid;
@@ -125,54 +102,6 @@ import PostUpload from "@/components/PostUpload.vue";
   grid-template-rows: max-content max-content 1fr max-content;
   max-height: 100%;
   height: 100%;
-}
-
-.author {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.post-desc {
-  width: 100%;
-  white-space: pre-wrap;
-  margin-top: 24px;
-}
-.comments {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-auto-rows: max-content;
-  grid-gap: 28px;
-  align-items: start;
-  overflow-y: auto;
-  height: 100%;
-}
-.comment {
-  display: grid;
-  grid-template-areas:
-    "avatar name date"
-    "comment comment comment";
-  grid-template-columns: 34px 1fr 1fr;
-  align-items: center;
-  column-gap: 10px;
-  row-gap: 14px;
-}
-.comment-date {
-  grid-area: date;
-  justify-self: end;
-  color: #a7a7a7;
-}
-.comment-content {
-  grid-area: comment;
-}
-
-.actions {
-  border-top: 1px solid #eaeaea;
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  align-items: center;
-  margin: 20px -24px 0 -24px;
-  padding: 20px 24px 0 24px;
-  row-gap: 16px;
 }
 
 .post-actions > :deep(svg) {
@@ -184,24 +113,4 @@ import PostUpload from "@/components/PostUpload.vue";
   justify-self: end;
   font-size: 14px;
 }
-.comment-input {
-  background: #f7f7f7;
-  border-radius: 16px;
-  border: none;
-  grid-column: 1 / 4;
-}
-.comment-input::placeholder {
-  color: #b9b9b9;
-  border: none;
-}
-.comment-pub-button {
-  color: #1da0ff;
-  border: none;
-  background: none;
-  font-size: 16px;
-  margin-left: 20px;
-  grid-column: 4 / 6;
-}
-
-/*Post Actions*/
 </style>
