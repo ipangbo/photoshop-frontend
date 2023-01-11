@@ -1,5 +1,5 @@
 <template>
-  <div class="post-item" v-for="n in 10" :key="n">
+  <div class="post-item">
     <img
       src="https://tc1.ipangbo.cn/image/Cover/220522.png"
       alt=""
