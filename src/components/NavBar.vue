@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar">
     <router-link to="/" class="logo-link">
-      <img src="../assets/logo.svg" alt="logo" class="logo-image"/>
+      <img src="../assets/logo.svg" alt="logo" class="logo-image" />
     </router-link>
     <div class="search-input">
       <input type="text" />
@@ -68,8 +68,7 @@ import TheAvatar from "@/components/TheAvatar.vue";
 
 .search-input input {
   width: 100%;
-  padding: 12px;
-  padding-left: 36px;
+  padding: 12px 12px 12px 36px;
 
   background: #f1f1f1;
   border-radius: 14px;
@@ -104,7 +103,7 @@ import TheAvatar from "@/components/TheAvatar.vue";
   padding: 24px 26px;
   list-style: none;
   background: white;
-  box-shadow: 0px 0px 24px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 0 24px rgba(0, 0, 0, 0.08);
   border-radius: 4px;
   right: 0;
   display: grid;
