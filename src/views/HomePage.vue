@@ -1,6 +1,7 @@
 <template>
   <div class="content">
-<!--    <PostDetails></PostDetails>-->
+    <!--    <PostDetails></PostDetails>-->
+    <PostUpload></PostUpload>
     <div class="post-list">
       <div class="post-item" v-for="n in 10" :key="n">
         <img
@@ -42,7 +43,7 @@
 <script setup lang="ts">
 import TheAvatar from "@/components/TheAvatar.vue";
 import PostActions from "@/components/PostActions.vue";
-import PostDetails from "@/components/PostDetails.vue";
+import PostUpload from "@/components/PostUpload.vue";
 </script>
 
 <style scoped>
