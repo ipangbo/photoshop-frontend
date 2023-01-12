@@ -2,8 +2,19 @@
   <TheModal>
     <div class="post-upload">
       <label class="upload">
-        <TheIcon icon="upload-image" />
-        <input type="file" accept="image/*" class="file-chooser" />
+        <img
+          :src="imageObjUrl"
+          alt="image preview"
+          v-if="imageObjUrl"
+          class="preview"
+        />
+        <TheIcon v-else icon="upload-image" />
+        <input
+          type="file"
+          accept="image/*"
+          class="file-chooser"
+          @change="handleImageUpload"
+        />
       </label>
       <div class="post-content">
         <textarea
@@ -20,6 +31,17 @@
 import TheModal from "@/components/TheModal.vue";
 import TheIcon from "@/components/TheIcon.vue";
 import TheButton from "@/components/TheButton.vue";
+import { ref } from "vue";
+
+const imageObjUrl = ref("");
+const handleImageUpload = async (e: any) => {
+  if (e.target.files[0]) {
+    const imageFile = e.target.files[0];
+    if (imageFile) {
+      imageObjUrl.value = URL.createObjectURL(imageFile);
+    }
+  }
+};
 </script>
 
 <style scoped>
@@ -28,6 +50,13 @@ import TheButton from "@/components/TheButton.vue";
   height: 70vh;
   display: grid;
   grid-template-rows: 4fr 1fr;
+}
+
+.preview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  min-height: 0;
 }
 
 .upload {

@@ -11,7 +11,7 @@
       <router-link to="/">
         <TheIcon icon="home"></TheIcon>
       </router-link>
-      <button>
+      <button @click="publishPost">
         <TheIcon icon="publish"></TheIcon>
       </button>
       <!-- dropdown -->
@@ -38,6 +38,12 @@
 <script setup lang="ts">
 import TheIcon from "@/components/TheIcon.vue";
 import TheAvatar from "@/components/TheAvatar.vue";
+import { usePostStore } from "@/stores/post";
+
+const postStore = usePostStore();
+const publishPost = () => {
+  postStore.showPostUpload = true;
+};
 </script>
 
 <style scoped>

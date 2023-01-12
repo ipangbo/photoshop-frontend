@@ -67,8 +67,7 @@ import TheModal from "@/components/TheModal.vue";
   object-fit: cover;
 }
 .post-meta {
-  padding: 24px;
-  padding-top: 36px;
+  padding: 36px 24px 24px;
   display: grid;
   align-items: start;
   grid-template-rows: max-content max-content 1fr max-content;
@@ -119,7 +118,7 @@ import TheModal from "@/components/TheModal.vue";
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   align-items: center;
-  margin: 20px -24px 0px -24px;
+  margin: 20px -24px 0 -24px;
   padding: 20px 24px 0 24px;
   row-gap: 16px;
 }
