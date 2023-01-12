@@ -33,7 +33,13 @@
     <div class="tab-content">
       <p>162篇帖子</p>
       <div class="posts">
-        <img v-for="n in 9" :key="n" class="post-image" src="https://cravatar.cn/avatar/641dc07b0ec22b5dd4a5be73766c49be?s=256&d=mm&r=gs"/>
+        <img
+          v-for="n in 9"
+          :key="n"
+          class="post-image"
+          alt=""
+          src="https://cravatar.cn/avatar/641dc07b0ec22b5dd4a5be73766c49be?s=256&d=mm&r=gs"
+        />
       </div>
     </div>
   </div>

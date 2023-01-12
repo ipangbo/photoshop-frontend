@@ -3,20 +3,26 @@
     <img src="../assets/phone.png" alt="background" class="phone-image" />
     <div class="login-form">
       <img src="../assets/logo.svg" alt="logo" />
-      <form>
-        <input type="email" placeholder="邮箱" />
-        <input type="text" placeholder="用户名" v-if="!isLogin" />
-        <input type="password" placeholder="密码" />
+      <form @submit.prevent>
+        <input type="email" placeholder="邮箱" v-model="email" />
+        <input
+          type="text"
+          placeholder="用户名"
+          v-if="!isLogin"
+          v-model="username"
+        />
+        <input type="password" placeholder="密码" v-model="password" />
         <div class="agreement">
           <label v-if="!isLogin">
-            <input type="checkbox" /> 勾选表示同意隐私协议和使用规范
+            <input type="checkbox" v-model="agreementChecked" />
+            勾选表示同意隐私协议和使用规范
           </label>
         </div>
-        <button type="submit" class="login-button">
+        <button type="submit" class="login-button" @click="register">
           {{ isLogin ? "登录" : "注册" }}
         </button>
         <p class="info" @click="isLogin = !isLogin">
-          {{ isLogin ? "还没有账号 ? 点击注册" : "已有账号, 点击登录" }}
+          {{ isLogin ? "还没有账号? 点击注册" : "已有账号, 点击登录" }}
         </p>
       </form>
     </div>
@@ -25,8 +31,30 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
+import { useUserStore } from "@/stores/user";
+import { useRouter } from "vue-router";
+
+const userStore = useUserStore();
+const router = useRouter();
 
 const isLogin = ref(true);
+const email = ref("");
+const username = ref("");
+const password = ref("");
+const agreementChecked = ref(false);
+
+const register = async () => {
+  if (!agreementChecked.value) {
+    alert("请先同意");
+    return;
+  }
+  await userStore.registerUser({
+    email: email.value,
+    username: username.value,
+    password: password.value,
+  });
+  router.replace("/");
+};
 </script>
 
 <style scoped>
@@ -59,6 +87,10 @@ const isLogin = ref(true);
   place-items: center;
   row-gap: 52px;
   width: 380px;
+}
+
+.login-form > img {
+  height: 150px;
 }
 
 .login-form > form {
