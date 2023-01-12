@@ -29,5 +29,5 @@ coverage
 
 # Project exclude paths
 /src/router/index.js
-/src/stores/counter.js
+/src/stores/user.js
 /src/main.js
