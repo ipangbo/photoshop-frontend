@@ -20,9 +20,10 @@
         <textarea
           placeholder="写下你的想法..."
           class="post-content-input"
+          v-model="description"
         ></textarea>
       </div>
-      <TheButton class="pub-button">发布</TheButton>
+      <TheButton class="pub-button" @click="publishPost">发布</TheButton>
     </div>
   </TheModal>
 </template>
@@ -32,15 +33,26 @@ import TheModal from "@/components/TheModal.vue";
 import TheIcon from "@/components/TheIcon.vue";
 import TheButton from "@/components/TheButton.vue";
 import { ref } from "vue";
+import { usePostStore } from "@/stores/post";
 
+const postStore = usePostStore();
+
+const image = ref(null);
+const description = ref("");
 const imageObjUrl = ref("");
 const handleImageUpload = async (e: any) => {
   if (e.target.files[0]) {
     const imageFile = e.target.files[0];
     if (imageFile) {
       imageObjUrl.value = URL.createObjectURL(imageFile);
+      console.log(imageObjUrl);
+      image.value = imageFile;
     }
   }
+};
+
+const publishPost = () => {
+  postStore.uploadPost({ image: image.value!, description: description.value });
 };
 </script>
 
