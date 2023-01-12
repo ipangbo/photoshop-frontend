@@ -1,6 +1,6 @@
 import { ref } from "vue";
 import { defineStore } from "pinia";
-import { getUser, register } from "@/apis/auth";
+import { getUser, login, register } from "@/apis/auth";
 
 export const useUserStore = defineStore("user", () => {
   const user = ref(getUser());
@@ -17,5 +17,15 @@ export const useUserStore = defineStore("user", () => {
     user.value = await register(email, username, password); // register函数包含存储localStorage
   };
 
-  return { user, registerUser };
+  const loginUser = async ({
+    email,
+    password,
+  }: {
+    email: string;
+    password: string;
+  }) => {
+    user.value = await login(email, password);
+  };
+
+  return { user, registerUser, loginUser };
 });

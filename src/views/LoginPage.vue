@@ -18,7 +18,11 @@
             勾选表示同意隐私协议和使用规范
           </label>
         </div>
-        <button type="submit" class="login-button" @click="register">
+        <button
+          type="submit"
+          class="login-button"
+          @click="isLogin ? login() : register()"
+        >
           {{ isLogin ? "登录" : "注册" }}
         </button>
         <p class="info" @click="isLogin = !isLogin">
@@ -53,7 +57,12 @@ const register = async () => {
     username: username.value,
     password: password.value,
   });
-  router.replace("/");
+  await router.replace("/");
+};
+
+const login = async () => {
+  await userStore.loginUser({ email: email.value, password: password.value });
+  await router.replace("/");
 };
 </script>
 
