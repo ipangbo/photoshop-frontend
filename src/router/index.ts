@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
+import { getJwtToken } from "@/apis/auth";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -29,6 +30,15 @@ const router = createRouter({
       component: () => import("../views/LoginPage.vue"),
     },
   ],
+});
+
+router.beforeEach((to) => {
+  if (to.name !== "login" && !getJwtToken()) {
+    return { name: "login" };
+  }
+  if (to.name === "login" && getJwtToken()) {
+    return { name: "home" };
+  }
 });
 
 export default router;
