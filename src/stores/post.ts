@@ -1,9 +1,10 @@
 import { ref, computed } from "vue";
 import { defineStore } from "pinia";
-import { createPost } from "@/apis/post";
+import { createPost, loadPosts } from "@/apis/post";
 
 export const usePostStore = defineStore("post", () => {
   const showPostUpload = ref(false);
+  const list = ref([]);
 
   const uploadPost = async ({
     image,
@@ -13,8 +14,13 @@ export const usePostStore = defineStore("post", () => {
     description: string;
   }) => {
     await createPost(image, description);
+    loadAllPosts().then();
     showPostUpload.value = false;
   };
 
-  return { showPostUpload, uploadPost };
+  const loadAllPosts = async () => {
+    list.value = await loadPosts();
+  };
+
+  return { showPostUpload, uploadPost, list, loadAllPosts };
 });

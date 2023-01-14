@@ -6,7 +6,7 @@
       @close="closePostUpload"
     ></PostUpload>
     <PostList>
-      <PostItem v-for="n in 12" :key="n"></PostItem>
+      <PostItem v-for="post in posts" :key="post.id" :post="post"></PostItem>
     </PostList>
   </div>
 </template>
@@ -16,12 +16,21 @@ import PostList from "@/components/PostList.vue";
 import PostItem from "@/components/PostItem.vue";
 import PostUpload from "@/components/PostUpload.vue";
 import { usePostStore } from "@/stores/post";
+import { onMounted, ref } from "vue";
 
 const postStore = usePostStore();
+
+const posts = ref([]);
 
 const closePostUpload = () => {
   postStore.showPostUpload = false;
 };
+
+onMounted(() => {
+  postStore.loadAllPosts().then(() => {
+    posts.value = postStore.list;
+  });
+});
 </script>
 
 <style scoped></style>

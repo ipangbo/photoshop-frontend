@@ -12,7 +12,7 @@ export async function request(
     body?: any;
     headers?: any;
     auth?: boolean;
-  }
+  } = {}
 ) {
   const res = await fetch(url, {
     method,
