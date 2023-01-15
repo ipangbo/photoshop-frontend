@@ -1,6 +1,6 @@
 <template>
   <div>
-    <!--    <PostDetails></PostDetails>-->
+    <PostDetails v-if="postStore.showPostDetail"></PostDetails>
     <PostUpload
       v-if="postStore.showPostUpload"
       @close="closePostUpload"
@@ -17,10 +17,11 @@ import PostItem from "@/components/PostItem.vue";
 import PostUpload from "@/components/PostUpload.vue";
 import { usePostStore } from "@/stores/post";
 import { onMounted, ref } from "vue";
+import PostDetails from "@/components/PostDetails.vue";
 
 const postStore = usePostStore();
 
-const posts = ref([]);
+const posts = ref<object[]>();
 
 const closePostUpload = () => {
   postStore.showPostUpload = false;

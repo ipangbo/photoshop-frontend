@@ -2,6 +2,7 @@
   <div class="post-item">
     <img
       :src="post.image"
+      @click="postStore.loadPostDetailById(post.id)"
       alt=""
       width="100%"
       height="100%"
@@ -20,6 +21,9 @@
           :favors="post.favored_bies"
           :likedByMe="post.likedByMe"
           :favoredByMe="post.favoredByMe"
+          @likeClick="postStore.toggleLike(post.id)"
+          @favorClick="postStore.toggleFavor(post.id)"
+          @commentsClick="postStore.loadPostDetailById(post.id)"
         />
       </div>
       <div class="post-desc">
@@ -35,11 +39,14 @@
 import TheAvatar from "@/components/TheAvatar.vue";
 import PostActions from "@/components/PostActions.vue";
 import { dateToRelative } from "@/utils/date";
+import { usePostStore } from "@/stores/post";
 
 interface Props {
   post: object;
 }
 defineProps<Props>();
+
+const postStore = usePostStore();
 </script>
 
 <style scoped>
