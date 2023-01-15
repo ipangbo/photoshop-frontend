@@ -51,6 +51,11 @@ export const usePostStore = defineStore("post", () => {
     showPostDetail.value = true;
   };
 
+  const increaseCommentCount = (id: string) => {
+    const post = list.value.find((post) => post.id === id);
+    post.comments++;
+  };
+
   return {
     showPostUpload,
     uploadPost,
@@ -61,5 +66,6 @@ export const usePostStore = defineStore("post", () => {
     loadPostDetailById,
     showPostDetail,
     currentPostDetail,
+    increaseCommentCount,
   };
 });

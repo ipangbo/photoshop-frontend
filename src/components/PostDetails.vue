@@ -37,8 +37,17 @@
             id=""
             class="comment-input"
             placeholder="写一条评论吧！"
+            v-model="content"
           />
-          <button class="comment-pub-button">发布</button>
+          <button
+            class="comment-pub-button"
+            @click="
+              commentStore.addComment(content, post.id);
+              content = '';
+            "
+          >
+            发布
+          </button>
         </div>
       </div>
     </div>
@@ -50,12 +59,15 @@ import PostActions from "@/components/PostActions.vue";
 import TheAvatar from "@/components/TheAvatar.vue";
 import TheModal from "@/components/TheModal.vue";
 import { usePostStore } from "@/stores/post";
-import { computed } from "vue";
+import { computed, ref } from "vue";
 import { dateToRelative } from "@/utils/date";
+import { useCommentStore } from "@/stores/comment";
 
 const postStore = usePostStore();
+const commentStore = useCommentStore();
 
 const post = computed(() => postStore.currentPostDetail);
+const content = ref("");
 </script>
 
 <style scoped>
