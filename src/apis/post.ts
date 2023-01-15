@@ -1,4 +1,4 @@
-import { getJwtToken } from "@/apis/auth";
+import { getJwtToken, getUser } from "@/apis/auth";
 import { request } from "@/utils/request";
 
 export async function createPost(image: File, description: string) {
@@ -13,8 +13,10 @@ export async function createPost(image: File, description: string) {
   });
 }
 
-export async function loadPosts() {
-  const response = await request("/api/posts?populate=*");
+export async function loadPosts(filters: string = "") {
+  const response = await request(
+    "/api/posts?populate=*" + (filters && `&${filters}`)
+  );
   return response.data.map((post: any) => ({
     id: post?.id,
     ...post?.attributes,
@@ -23,6 +25,20 @@ export async function loadPosts() {
       id: post?.attributes?.user?.data?.id,
       ...post?.attributes?.user?.data?.attributes,
     },
+  }));
+}
+
+export async function loadPostsByMe() {
+  return loadPosts(`filters[user][id][$eq]=${getUser().id}`);
+}
+
+export async function loadPostsLikedOrFavoredByMe(type: string = "likes") {
+  const response = await request(
+    `/api/users/me?populate[${type}][populate][0]=image`
+  );
+  return response[type].map((post: any) => ({
+    ...post,
+    image: post?.image?.[0].url,
   }));
 }
 
