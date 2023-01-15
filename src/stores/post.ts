@@ -1,6 +1,7 @@
-import { ref, computed } from "vue";
+import { ref } from "vue";
 import { defineStore } from "pinia";
 import { createPost, favorPost, likePost, loadPosts } from "@/apis/post";
+import { useCommentStore } from "@/stores/comment";
 
 export const usePostStore = defineStore("post", () => {
   const showPostUpload = ref(false);
@@ -46,8 +47,10 @@ export const usePostStore = defineStore("post", () => {
     post.favoredByMe = isFavor;
   };
 
-  const loadPostDetailById = (id: string) => {
+  const loadPostDetailById = async (id: string) => {
     currentPostDetail.value = list.value.find((post) => post.id === id);
+    const commentStore = useCommentStore();
+    commentStore.loadAllComments(id).then();
     showPostDetail.value = true;
   };
 

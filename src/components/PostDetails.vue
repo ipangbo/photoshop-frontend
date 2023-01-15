@@ -11,11 +11,13 @@
           >{{ post.description }}
         </pre>
         <div class="comments">
-          <div class="comment" v-for="n in 2" :key="n">
-            <TheAvatar />
-            <span class="user">{{ n }}</span>
-            <span class="comment-date"> 13小时前 </span>
-            <p class="comment-content"></p>
+          <div class="comment" v-for="comment in comments" :key="comment.id">
+            <TheAvatar :src="comment.user?.avatar" />
+            <span class="user">{{ comment.user?.name }}</span>
+            <span class="comment-date">
+              {{ dateToRelative(comment.pubDate) }}
+            </span>
+            <p class="comment-content">{{ comment.content }}</p>
           </div>
         </div>
         <div class="actions">
@@ -41,10 +43,7 @@
           />
           <button
             class="comment-pub-button"
-            @click="
-              commentStore.addComment(content, post.id);
-              content = '';
-            "
+            @click="handleCommitComment(post, content)"
           >
             发布
           </button>
@@ -67,7 +66,15 @@ const postStore = usePostStore();
 const commentStore = useCommentStore();
 
 const post = computed(() => postStore.currentPostDetail);
+const comments = computed(() => commentStore.list);
+
 const content = ref("");
+
+const handleCommitComment = async (post: any, commentContent: string) => {
+  await commentStore.addComment(commentContent, post.id);
+  content.value = "";
+  await commentStore.loadAllComments(post.id);
+};
 </script>
 
 <style scoped>
