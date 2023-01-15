@@ -8,7 +8,7 @@ export function setJwtToken(jwt: string) {
   localStorage.setItem("jwtToken", jwt);
 }
 
-export function getUser(): object {
+export function getUser(): any {
   return JSON.parse(localStorage.getItem("user") || "{}");
 }
 

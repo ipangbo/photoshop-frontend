@@ -1,6 +1,7 @@
 import { ref } from "vue";
 import { defineStore } from "pinia";
 import { getUser, login, register } from "@/apis/auth";
+import { changeUser } from "@/apis/user";
 
 export const useUserStore = defineStore("user", () => {
   const user = ref(getUser());
@@ -27,5 +28,9 @@ export const useUserStore = defineStore("user", () => {
     user.value = await login(email, password);
   };
 
-  return { user, registerUser, loginUser };
+  const updateUser = async (newUser: any) => {
+    user.value = await changeUser(newUser);
+  };
+
+  return { user, registerUser, loginUser, updateUser };
 });
