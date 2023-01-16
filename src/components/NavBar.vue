@@ -17,19 +17,20 @@
       <!-- dropdown -->
       <div class="profile-dropdown">
         <TheAvatar
-          src="https://cravatar.cn/avatar/641dc07b0ec22b5dd4a5be73766c49be?s=256&d=mm&r=g"
+          :src="userStore.user.avatar"
           :width="42"
           :height="42"
           style="cursor: pointer"
+          @click="showDropdown = !showDropdown"
         ></TheAvatar>
-        <!--        <div class="dropdown-menu">-->
-        <!--          <ul class="profile-menu">-->
-        <!--            <li>-->
-        <!--              <router-link to="/profile">个人主页</router-link>-->
-        <!--            </li>-->
-        <!--            <li>退出登录</li>-->
-        <!--          </ul>-->
-        <!--        </div>-->
+        <div class="dropdown-menu" v-show="showDropdown">
+          <ul class="profile-menu">
+            <li>
+              <router-link to="/profile">个人主页</router-link>
+            </li>
+            <li @click="handleUserLogout">退出登录</li>
+          </ul>
+        </div>
       </div>
     </div>
   </nav>
@@ -39,8 +40,15 @@
 import TheIcon from "@/components/TheIcon.vue";
 import TheAvatar from "@/components/TheAvatar.vue";
 import { usePostStore } from "@/stores/post";
+import { ref } from "vue";
+import { useUserStore } from "@/stores/user";
+import { useRouter } from "vue-router";
 
 const postStore = usePostStore();
+const userStore = useUserStore();
+const router = useRouter();
+
+const showDropdown = ref(false);
 const publishPost = () => {
   postStore.showPostUpload = true;
 };
@@ -48,6 +56,11 @@ const publishPost = () => {
 const searchPosts = async (e: any) => {
   postStore.searchTerm = e.target.value;
   await postStore.searchPosts();
+};
+
+const handleUserLogout = () => {
+  userStore.logoutUser();
+  router.push("/login");
 };
 </script>
 
