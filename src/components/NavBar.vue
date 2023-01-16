@@ -4,7 +4,7 @@
       <img src="../assets/logo.svg" alt="logo" class="logo-image" />
     </router-link>
     <div class="search-input">
-      <input type="text" />
+      <input type="text" @change="searchPosts" />
       <TheIcon icon="search"></TheIcon>
     </div>
     <div class="nav-items">
@@ -43,6 +43,11 @@ import { usePostStore } from "@/stores/post";
 const postStore = usePostStore();
 const publishPost = () => {
   postStore.showPostUpload = true;
+};
+
+const searchPosts = async (e: any) => {
+  postStore.searchTerm = e.target.value;
+  await postStore.searchPosts();
 };
 </script>
 

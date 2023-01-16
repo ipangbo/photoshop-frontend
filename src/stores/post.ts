@@ -8,6 +8,8 @@ export const usePostStore = defineStore("post", () => {
   const showPostDetail = ref(false);
   const currentPostDetail = ref<object>();
   const list = ref<any[]>([]);
+  const searchTerm = ref("");
+  const searchResult = ref([]);
 
   const uploadPost = async ({
     image,
@@ -59,6 +61,12 @@ export const usePostStore = defineStore("post", () => {
     post.comments++;
   };
 
+  const searchPosts = async () => {
+    searchResult.value = await loadPosts(
+      "filters[description][$contains]=" + searchTerm.value
+    );
+  };
+
   return {
     showPostUpload,
     uploadPost,
@@ -70,5 +78,8 @@ export const usePostStore = defineStore("post", () => {
     showPostDetail,
     currentPostDetail,
     increaseCommentCount,
+    searchResult,
+    searchTerm,
+    searchPosts,
   };
 });
